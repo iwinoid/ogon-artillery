@@ -4,7 +4,7 @@ for (f in c("config.R", "ballistics.R", "map.R", "fdc.R", "ui.R", "mission.R", "
   source(p, encoding = "UTF-8")
 }
 set.seed(7)
-dir.create("docs", showWarnings = FALSE, recursive = TRUE)   # PNG 输出目录（不存在时自建）
+dir.create("output", showWarnings = FALSE, recursive = TRUE)  # 生成物目录（整目录 .gitignore）
 
 m <- gen_terrain_procedural(seed = 20240601)
 cat(map_info(m), "\n")
@@ -19,11 +19,11 @@ overlay <- list(
   wind = list(from_mils = 2250, speed = 6),
   title = "ОГОНЬ! — 地图（风格 B：平色 + 调色板1）"
 )
-draw_map(m, overlay, file = "docs/demo_map_v3.png", shade = FALSE, palette = terrain_palette)
-cat("已输出 docs/demo_map_v3.png\n")
+draw_map(m, overlay, file = "output/demo_map_v3.png", shade = FALSE, palette = terrain_palette)
+cat("已输出 output/demo_map_v3.png\n")
 
 # ---- 2×2 风格对比 ----
-png("docs/map_styles.png", width = 1100, height = 1100, res = 110)
+png("output/map_styles.png", width = 1100, height = 1100, res = 110)
 op <- par(mfrow = c(2, 2), mar = c(3, 3, 2.5, 1), oma = c(0, 0, 2, 0))
 draw_map(m, list(title = "A: 阴影 + 调色板1", wind = list(from_mils = 2250, speed = 6)),
          shade = TRUE, palette = terrain_palette)
@@ -34,7 +34,7 @@ draw_map(m, list(title = "D: 无阴影 + 调色板2"), shade = FALSE, palette = 
 mtext("地图风格对比（请挑选最接近你想要的一版）", outer = TRUE, cex = 1.2, font = 2)
 par(op)
 invisible(dev.off())
-cat("已输出 docs/map_styles.png\n")
+cat("已输出 output/map_styles.png\n")
 
 ok <- function(cond, msg) { if (isTRUE(cond)) cat("  ✓", msg, "\n") else { cat("  ✗", msg, "\n"); quit(status = 1) } }
 
@@ -90,8 +90,8 @@ overlay4 <- list(
   title = paste0(map_info(g1), " · v4")
 )
 t1 <- proc.time()
-draw_map(g1, overlay4, file = "docs/demo_map_v4.png")
-cat(sprintf("渲染耗时 %.1fs，已输出 docs/demo_map_v4.png\n", (proc.time() - t1)[3]))
+draw_map(g1, overlay4, file = "output/demo_map_v4.png")
+cat(sprintf("渲染耗时 %.1fs，已输出 output/demo_map_v4.png\n", (proc.time() - t1)[3]))
 
 cat("\n===== 画布与高程分带：纯函数 =====\n")
 m_A <- list(extent_km = c(0, 20, 0, 20), elev = matrix(100, 10, 10))
@@ -135,8 +135,8 @@ ok(identical(cs_hi, c(1760, 1760)), "画布 1760×1760 上限内")
 
 cat("\n===== 战术地图渲染 =====\n")
 t5 <- proc.time()
-draw_map(g1, overlay4, file = "docs/demo_tactical.png", style = "tactical")
-ok(file.exists("docs/demo_tactical.png"), sprintf("战术图输出（%.1fs）", (proc.time() - t5)[3]))
+draw_map(g1, overlay4, file = "output/demo_tactical.png", style = "tactical")
+ok(file.exists("output/demo_tactical.png"), sprintf("战术图输出（%.1fs）", (proc.time() - t5)[3]))
 ok(contour_step(g1) == 25, "战术主线 25m（程序图）")
 
 cat("完成 ✓\n")

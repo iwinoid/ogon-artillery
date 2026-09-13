@@ -22,7 +22,7 @@ ok(abs(site_mils(100, 200, 10000) - atan2(100, 10000) * 3000 / pi) < 1e-6, "高�
 ok(wind_drift_m(list(from_mils = 900, speed = 10), 0, 30) < 0, "东风→弹向西(左)偏")
 
 cat("\n===== 2. 初始化、主菜单与战役 =====\n")
-st <- init_game(seed = 11, mode = "std", test_mode = TRUE, png_dir = "docs/frames")
+st <- init_game(seed = 11, mode = "std", test_mode = TRUE, png_dir = "output/frames")
 ok(st$screen == "menu" && is.null(st$mission), "初始化停在主菜单")
 ok(st$gun$name == GUNS$D20$name, "默认 D-20")
 st <- dispatch_menu(st, "5")   # 帮助
@@ -86,7 +86,7 @@ ok(st$mission_index == 2 && !is.null(st$mission), "自动进入任务2")
 ok(length(st$campaign$scores) == 1, "任务1成绩已入账")
 
 cat("\n===== 3.5 教程关 =====\n")
-stt <- init_game(seed = 20, mode = "std", test_mode = TRUE, png_dir = "docs/frames")
+stt <- init_game(seed = 20, mode = "std", test_mode = TRUE, png_dir = "output/frames")
 stt <- menu_campaign(stt, commands = c("3"))
 ok(stt$screen == "game" && stt$mission$key == "tutorial", "菜单进入教程关")
 ok(stt$mission$target$radius == 150 && stt$wind$speed == 0, "教程目标大半径无风")
@@ -109,7 +109,7 @@ stt5 <- dispatch_menu(stt5, "场景")
 ok(is.null(stt5$scenario), "旧关键字 场景 不崩溃（test_mode 无输入返回）")
 
 cat("\n===== 5.5 侦察偏移（生成）=====\n")
-sr <- init_game(seed = 99, mode = "std", test_mode = TRUE, png_dir = "docs/frames8")
+sr <- init_game(seed = 99, mode = "std", test_mode = TRUE, png_dir = "output/frames8")
 sr <- start_campaign(sr)
 t7 <- sr$mission$target
 ok(!is.null(t7$truth_x) && !is.null(t7$truth_y), "随机任务带侦察真值 truth_x/truth_y")
@@ -146,38 +146,38 @@ script <- c("帮助", "地图", "任务", "气象", "炮位", "选择 2",
             "诸元 target", "射击 100 100 1 1",
             "诸元", "射击", "修正", "选择", "急促", "效力", "弹道",  # 裸命令应给用法提示而非崩溃
             "退出", "退出")
-st2 <- init_game(seed = 5, mode = "arcade", test_mode = TRUE, png_dir = "docs/frames2")
+st2 <- init_game(seed = 5, mode = "arcade", test_mode = TRUE, png_dir = "output/frames2")
 st2 <- start_campaign(st2)
 st2 <- game_loop(st2, commands = script)
 ok(st2$screen == "menu", "脚本对局：退出返回主菜单")
 ok(st2$gun_sel == 2, "选择 2 切换炮位")
-frames <- list.files("docs/frames", pattern = "\\.png$")
+frames <- list.files("output/frames", pattern = "\\.png$")
 ok(length(frames) > 2, sprintf("地图帧已输出 (%d 张)", length(frames)))
-trajs <- list.files("docs/frames", pattern = "^traj_")
+trajs <- list.files("output/frames", pattern = "^traj_")
 ok(length(trajs) >= 1, "弹道侧视图帧已输出")
 
 cat("\n===== 5. 其他火炮与模式 =====\n")
 st3 <- init_game(gun_key = "M46", mode = "hard", seed = 3, test_mode = TRUE,
-                 png_dir = "docs/frames3")
+                 png_dir = "output/frames3")
 ok(length(st3$gun$mv) == 5, "M-46 五档装药")
 ok(max(st3$table$max_range) > 25000, "M-46 表上最大射程 >25km")
 ok(st3$mode_cfg$calculator == FALSE && st3$mode_cfg$show_radius == FALSE, "全真模式关闭辅助")
 
 st4 <- init_game(gun_key = "M109", mode = "std", seed = 4, test_mode = TRUE,
-                 png_dir = "docs/frames4")
+                 png_dir = "output/frames4")
 ok(length(st4$gun$mv) == 8, "M109 八档装药")
 ok(max(st4$table$max_range) > 18000 && max(st4$table$max_range) < 19500, "M109 表上最大射程≈18km")
 ok(st4$gun$elev_max == 1250, "M109 高低射界 75°(1250密位)")
 
 st5 <- init_game(gun_key = "B4", mode = "std", seed = 6, test_mode = TRUE,
-                 png_dir = "docs/frames5")
+                 png_dir = "output/frames5")
 ok(length(st5$gun$mv) == 6, "B-4 六档装药")
 ok(max(st5$table$max_range) > 17500 && max(st5$table$max_range) < 19000, "B-4 表上最大射程≈18km")
 ok(st5$gun$elev_max == 1000, "B-4 高低射界 60°(1000密位)")
 ok(st5$gun$shell_mass == 100, "B-4 弹重 100kg")
 
 st6 <- init_game(gun_key = "B37", mode = "std", seed = 8, test_mode = TRUE,
-                 png_dir = "docs/frames6")
+                 png_dir = "output/frames6")
 ok(length(st6$gun$mv) == 6, "B-37 六档装药")
 ok(max(st6$table$max_range) > 44000 && max(st6$table$max_range) < 47000, "B-37 表上最大射程≈45.5km")
 ok(st6$gun$shell_mass == 1108, "B-37 弹重 1108kg（战争雷霆数据）")
@@ -186,7 +186,7 @@ ok(st6$gun$disp[1] == 1/300, "B-37 距离散布 1/300")
 
 cat("\n===== 6. 据点附近弹着报告 =====\n")
 stp <- init_game(gun_key = "B37", mode = "std", seed = 7, test_mode = TRUE,
-                 png_dir = "docs/frames7")
+                 png_dir = "output/frames7")
 stp <- start_scenario(stp, "leningrad")
 # 加特契纳(19.4,-10.5)/托斯诺在场景范围外已被剔除；用范围内合成德军据点测识别
 stp$map$places <- c(stp$map$places,

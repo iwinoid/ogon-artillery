@@ -1,6 +1,6 @@
 # =====================================================================
 # playthrough.R — AI 玩家试玩：三个模式各打一整场战役（4任务），
-# 全程通过命令界面操作并转录到 docs/playthrough_logs/
+# 全程通过命令界面操作并转录到 output/playthrough_logs/
 # 运行: Rscript tests/playthrough.R
 # =====================================================================
 for (f in c("config.R", "ballistics.R", "map.R", "fdc.R", "ui.R", "mission.R", "game.R")) {
@@ -85,7 +85,7 @@ play_mission <- function(st) {
 
 # 打一整场战役（4 个任务），转录到文件
 play_campaign <- function(mode, seed) {
-  out <- file.path("docs", "playthrough_logs", sprintf("session_%s_seed%d.txt", mode, seed))
+  out <- file.path("output", "playthrough_logs", sprintf("session_%s_seed%d.txt", mode, seed))
   dir.create(dirname(out), recursive = TRUE, showWarnings = FALSE)
   sink(out)
   on.exit(sink(), add = TRUE)
@@ -105,4 +105,4 @@ play_campaign <- function(mode, seed) {
 play_campaign("arcade", 20240601)
 play_campaign("std", 777)
 play_campaign("hard", 55555)
-cat("试玩结束，转录见 docs/playthrough_logs/\n")
+cat("试玩结束，转录见 output/playthrough_logs/\n")

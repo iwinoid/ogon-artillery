@@ -68,7 +68,7 @@ In RStudio, open `main.R` and click **Source**. The game finds its own directory
 
 ### Uninstall
 
-Delete the directory. The game writes only to `docs/` (map frames and playthrough logs).
+Delete the directory. The game writes only to `output/` (map frames and playthrough logs).
 
 ## Usage
 

@@ -277,7 +277,7 @@ Rscript main.R --nocolor        # 关 ANSI 颜色
 # 3) 首发偏差里既有散布也有上报误差——第一发本来就是用来把两者一起试出来的。
 ```
 
-> 完整未删节日志见 `docs/playthrough_logs/session_std_seed777.txt`（`Rscript tests/playthrough.R` 每次都会重生成）。
+> 完整未删节日志见 `output/playthrough_logs/session_std_seed777.txt`（`Rscript tests/playthrough.R` 每次都会重生成）。
 
 ---
 

@@ -7,7 +7,7 @@
 #   Rscript main.R --gun M46          130mm 加农炮
 #   Rscript main.R --seed 42          固定随机种子
 #   Rscript main.R --map data/dem_cache.rds   真实地形
-#   Rscript main.R --test cmds.txt --pngdir docs/frames   脚本化对局(测试)
+#   Rscript main.R --test cmds.txt --pngdir output/frames   脚本化对局(测试)
 # =====================================================================
 
 # ---- 定位本脚本目录并切换到游戏目录 ----
@@ -38,7 +38,7 @@ gun_key <- get_flag("--gun", "D20")
 map_file<- get_flag("--map", NULL)
 seed_s  <- get_flag("--seed", NULL)
 test_f  <- get_flag("--test", NULL)
-png_dir <- get_flag("--pngdir", file.path("docs", "frames"))
+png_dir <- get_flag("--pngdir", file.path("output", "frames"))
 scen_s  <- get_flag("--scenario", NULL)
 
 # 路径参数按启动目录语义解析（setwd 前先绝对化，防止切换目录后相对路径失效）

@@ -2,7 +2,7 @@
 source("config.R", encoding = "UTF-8")
 source("ballistics.R", encoding = "UTF-8")
 set.seed(42)
-dir.create("docs", showWarnings = FALSE, recursive = TRUE)   # PNG 输出目录（不存在时自建）
+dir.create("output", showWarnings = FALSE, recursive = TRUE)  # 生成物目录（整目录 .gitignore）
 
 cat("===== 阻力系数校准（45°全装药射程应≈历史最大射程）=====\n")
 for (g in names(GUNS)) {
@@ -61,11 +61,11 @@ imp <- disperse_impact(0, 8000, 0, 8000, GUNS$D20)
 cat(sprintf("散布2: dR=%.0fm dD=%.0fm\n", imp[2] - 8000, imp[1]))
 
 cat("\n===== 弹道侧视图输出 PNG =====\n")
-png("docs/demo_side.png", width = 900, height = 560, res = 110)
+png("output/demo_side.png", width = 900, height = 560, res = 110)
 tr$actual <- c(tr$impact$x + 30, tr$impact$y - 45)
 tr$charge <- 3; tr$az <- 0; tr$range_m <- 8000
 plot_side_view(tr, GUNS$D20, 0, list(from_mils = 0, speed = 0), ground_fun = flat)
 dev.off()
-cat("已输出 docs/demo_side.png\n")
+cat("已输出 output/demo_side.png\n")
 
 cat("\n全部完成 ✓\n")

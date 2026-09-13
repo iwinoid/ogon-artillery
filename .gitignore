@@ -1,8 +1,8 @@
 .Rhistory
 .RData
 Rplots.pdf
-docs/frames*/
-docs/playthrough_logs/
-docs/frame_*.png
-docs/traj_*.png
-docs/*.log
+output/
+
+# 快照仓库根规则（发布时 Огонь!/.gitignore 会成为仓库根的 .gitignore）
+.memsearch/
+Огонь!/
