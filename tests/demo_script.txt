@@ -1,0 +1,12 @@
+# 演示对局脚本（非交互，输出帧到 docs/frames）
+# 运行: Rscript main.R --mode arcade --test tests/demo_script.txt
+任务
+地图
+诸元 target
+射击 1000 300 2 1
+修正 -120 -35
+气象
+弹道
+成绩
+退出
+退出

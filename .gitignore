@@ -1,0 +1,11 @@
+docs/frame_*.png
+docs/frames*/
+docs/*.log
+docs/playthrough_logs/
+docs/traj_*.png
+.memsearch/
+.RData
+.Rhistory
+Rplots.pdf
+Огонь!/docs/frames*/
+Огонь!/docs/*.log
