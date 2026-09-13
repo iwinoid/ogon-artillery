@@ -192,7 +192,6 @@ RStudio 里打开 `main.R`，点 **Source**。游戏自己定位所在目录，�
 - [R 项目](https://www.r-project.org/) 与其 base graphics。
 - [AWS Terrain Tiles](https://registry.opendata.aws/terrain-tiles/) 提供列宁格勒高程数据。
 - 维基百科提供涅瓦河沿线城镇坐标。
-- [fw-fanctrl-kde](https://github.com/iwinoid/fw-fanctrl-kde) 提供 README 结构参考。
 
 ## 参与
 

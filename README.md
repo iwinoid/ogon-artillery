@@ -192,7 +192,6 @@ The game commands are the interface. Chinese and English names are equivalent.
 - The [R project](https://www.r-project.org/) and its base graphics.
 - [AWS Terrain Tiles](https://registry.opendata.aws/terrain-tiles/) for the Leningrad elevation data.
 - Wikipedia for the town coordinates along the Neva river.
-- [fw-fanctrl-kde](https://github.com/iwinoid/fw-fanctrl-kde) for the README structure.
 
 ## Contributing
 
